@@ -49,5 +49,5 @@ jobs:
     needs: test
     runs-on: ubuntu-latest
     steps:
-      - name: Trigger the deploy on Render
-        run: curl -X GET ${{ secrets.RENDER_TRIGGER }}
+      - name: Trigger the deploy
+        run: echo Deploying...
