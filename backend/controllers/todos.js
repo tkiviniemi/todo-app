@@ -81,6 +81,11 @@ const updateTodo = async (req, res) => {
   };
 
   try {
+    const result = await todos.findTodoById(id);
+    if (result.length === 0) {
+      res.status(404).send('Todo not found');
+      return;
+    }
     const response = await todos.updateById(id, todo);
     if (response) {
       todo.id = id;
