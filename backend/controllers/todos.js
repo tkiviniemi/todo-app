@@ -60,6 +60,37 @@ const createTodo = async (req, res) => {
   }
 };
 
+const updateTodo = async (req, res) => {
+  const schema = Joi.object({
+    task: Joi.string().min(4).required(),
+    tag: Joi.string().min(4).required(),
+    done: Joi.boolean(),
+  });
+  const { error } = schema.validate(req.body);
+  if (error) {
+    res.status(400).send(error.details[0].message);
+    return;
+  }
+
+  const id = parseInt(req.params.id);
+
+  const todo = {
+    task: req.body.task,
+    tag: req.body.tag,
+    done: req.body.done || false,
+  };
+
+  try {
+    const response = await todos.updateById(id, todo);
+    if (response) {
+      todo.id = id;
+      res.status(200).send(todo);
+    }
+  } catch (err) {
+    res.status(500).send('Something went wrong');
+  }
+};
+
 const deleteTodo = async (req, res) => {
   const id = parseInt(req.params.id);
   try {
@@ -76,5 +107,6 @@ module.exports = {
   getTodos,
   getTodoById,
   createTodo,
+  updateTodo,
   deleteTodo,
 };

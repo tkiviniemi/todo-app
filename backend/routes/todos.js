@@ -7,6 +7,7 @@ const {
   getTodos,
   getTodoById,
   createTodo,
+  updateTodo,
   deleteTodo,
 } = require('../controllers/todos');
 
@@ -17,6 +18,8 @@ router.get('/:id', getTodoById);
 //router.use(verifyToken);
 
 router.post('/', createTodo);
+
+router.put('/:id', updateTodo);
 
 router.delete('/:id', deleteTodo);
 

@@ -68,6 +68,25 @@ const todos = {
         });
       });
     }),
+  updateById: (id, todo) =>
+    new Promise((resolve, reject) => {
+      pool.getConnection((err, connection) => {
+        if (err) {
+          return reject(err);
+        }
+        connection.query(
+          `UPDATE todos SET ? WHERE id = ?`,
+          [todo, id],
+          (err, results) => {
+            connection.release();
+            if (err) {
+              return reject(err);
+            }
+            resolve(results);
+          }
+        );
+      });
+    }),
   deleteById: (id) =>
     new Promise((resolve, reject) => {
       pool.getConnection((err, connection) => {
