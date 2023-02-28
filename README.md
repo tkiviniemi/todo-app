@@ -8,14 +8,34 @@ Originates from a private GitHub classroom repo for a full stack course, hence g
 
 Copied over and continuing in this repo so that the project is visible to everyone.
 
-## Todo
+## Features / TODO
 
-- [ ] Full crud functionality
-  - Updates missing for both
-  - Delete missing for users
-- [ ] Authenticate users on Create/Update/Delete (all authentication is skipped for now)
-- [ ] Tests, especially for frontend
-- [ ] Deploy to somewhere
+- [ ] Backend
+  - [x] Create a todo
+  - [x] Create a user
+  - [x] Get todos
+  - [x] Get users
+  - [x] Update a todo
+  - [ ] Update a user
+  - [x] Delete a todo
+  - [x] Delete a user
+- [ ] Frontend
+  - [x] Create a todo
+  - [x] Create a user
+  - [x] Get todos
+  - [x] Get users
+  - [ ] Update a todo
+  - [ ] Update a user
+  - [ ] Delete a todo
+  - [ ] Delete a user
+- [ ] Authenticate users on Create/Update/Delete
+  - All authentication is skipped for now, backend works if you enable the authentication in routes
+- [ ] Tests
+  - [x] Backend Unit tests
+  - [ ] Frontend Unit tests
+  - [ ] End-2-End tests
+  - [x] Tests ran through Github Actions
+- [ ] Deployed to somewhere (with GitHub Actions)
 - [ ] Update readme for dependencies and explain the app
 
 ## Running the app locally
