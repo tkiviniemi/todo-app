@@ -1,3 +1,6 @@
 node_modules/
 
 .env
+
+# vscode extension's file for manual testing
+localhost.rest

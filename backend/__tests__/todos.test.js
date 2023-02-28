@@ -266,6 +266,208 @@ describe('POST todo endpoint', () => {
   });
 });
 
+describe('PUT todo endpoint', () => {
+  const loggedInUser = {
+    id: '',
+    email: '',
+    token: '',
+  };
+
+  beforeAll(async () => {
+    connection.query('DELETE FROM users WHERE email = ?', [
+      'john.wayne@domain.com',
+    ]);
+    const data = {
+      name: 'John Wayne',
+      email: 'john.wayne@domain.com',
+      password: 'password123',
+    };
+
+    const response = await supertest(app)
+      .post('/api/users/signup')
+      .set('Accept', 'application/json')
+      .send(data);
+    loggedInUser.id = response.body.id;
+    loggedInUser.email = response.body.email;
+    loggedInUser.token = response.body.token;
+  });
+
+  afterAll(async () => {
+    const deleteQuery = "DELETE FROM todos WHERE task LIKE 'Test Todo%';";
+    connection.query(deleteQuery, (err, result) => {
+      if (err) {
+        console.log(err);
+      }
+    });
+  });
+
+  test('Should update a todo by id', async () => {
+    const todo = {
+      task: 'Test Todo Update',
+      tag: 'test',
+      done: false,
+    };
+
+    const postResponse = await supertest(app)
+      .post('/api/todos')
+      .set('Accept', 'application/json')
+      .set('Content-Type', 'application/json')
+      .set('Authorization', `Bearer ${loggedInUser.token}`)
+      .send(todo);
+
+    const todoId = postResponse.body.id;
+
+    const updateTodo = {
+      task: 'Test Todo Updated',
+      tag: 'tested',
+      done: true,
+    };
+
+    const updateResponse = await supertest(app)
+      .put(`/api/todos/${todoId}`)
+      .set('Accept', 'application/json')
+      .set('Content-Type', 'application/json')
+      .set('Authorization', `Bearer ${loggedInUser.token}`)
+      .send(updateTodo);
+
+    expect(updateResponse.status).toEqual(200);
+    expect(updateResponse.body.task).toEqual(updateTodo.task);
+    expect(updateResponse.body.tag).toEqual(updateTodo.tag);
+    expect(updateResponse.body.done).toEqual(updateTodo.done);
+  });
+
+  test('Should not update a todo with an invalid id', async () => {
+    const todo = {
+      task: 'Test Todo Update Invalid Id',
+      tag: 'test',
+      done: false,
+    };
+
+    const postResponse = await supertest(app)
+      .post('/api/todos')
+      .set('Accept', 'application/json')
+      .set('Content-Type', 'application/json')
+      .set('Authorization', `Bearer ${loggedInUser.token}`)
+      .send(todo);
+
+    const todoId = postResponse.body.id;
+
+    const updateTodo = {
+      task: 'Test Todo Updated Invalid Id',
+      tag: 'tested',
+      done: true,
+    };
+
+    const updateResponse = await supertest(app)
+      .put(`/api/todos/${todoId}1`)
+      .set('Accept', 'application/json')
+      .set('Content-Type', 'application/json')
+      .set('Authorization', `Bearer ${loggedInUser.token}`)
+      .send(updateTodo);
+
+    expect(updateResponse.status).toEqual(404);
+  });
+
+  test('Should not update a todo with an empty value for task', async () => {
+    const todo = {
+      task: 'Test Todo Update Empty Task',
+      tag: 'test',
+      done: false,
+    };
+
+    const postResponse = await supertest(app)
+      .post('/api/todos')
+      .set('Accept', 'application/json')
+      .set('Content-Type', 'application/json')
+      .set('Authorization', `Bearer ${loggedInUser.token}`)
+      .send(todo);
+
+    const todoId = postResponse.body.id;
+
+    const updateTodo = {
+      task: '',
+      tag: 'tested',
+      done: true,
+    };
+
+    const updateResponse = await supertest(app)
+      .put(`/api/todos/${todoId}`)
+      .set('Accept', 'application/json')
+      .set('Content-Type', 'application/json')
+      .set('Authorization', `Bearer ${loggedInUser.token}`)
+      .send(updateTodo);
+
+    expect(updateResponse.status).toEqual(400);
+    expect(updateResponse.text).toContain('"task" is not allowed to be empty');
+  });
+
+  test('Should not update a todo with an empty value for tag', async () => {
+    const todo = {
+      task: 'Test Todo Update Empty Tag',
+      tag: 'test',
+      done: false,
+    };
+
+    const postResponse = await supertest(app)
+      .post('/api/todos')
+      .set('Accept', 'application/json')
+      .set('Content-Type', 'application/json')
+      .set('Authorization', `Bearer ${loggedInUser.token}`)
+      .send(todo);
+
+    const todoId = postResponse.body.id;
+
+    const updateTodo = {
+      task: 'Test Todo Updated Empty Tag',
+      tag: '',
+      done: true,
+    };
+
+    const updateResponse = await supertest(app)
+      .put(`/api/todos/${todoId}`)
+      .set('Accept', 'application/json')
+      .set('Content-Type', 'application/json')
+      .set('Authorization', `Bearer ${loggedInUser.token}`)
+      .send(updateTodo);
+
+    expect(updateResponse.status).toEqual(400);
+    expect(updateResponse.text).toContain('"tag" is not allowed to be empty');
+  });
+
+  test('Should be able to update a todo without a value for done', async () => {
+    const todo = {
+      task: 'Test Todo Update No Done',
+      tag: 'test',
+      done: false,
+    };
+
+    const postResponse = await supertest(app)
+      .post('/api/todos')
+      .set('Accept', 'application/json')
+      .set('Content-Type', 'application/json')
+      .set('Authorization', `Bearer ${loggedInUser.token}`)
+      .send(todo);
+
+    const todoId = postResponse.body.id;
+
+    const updateTodo = {
+      task: 'Test Todo Updated No Done',
+      tag: 'tested',
+    };
+
+    const updateResponse = await supertest(app)
+      .put(`/api/todos/${todoId}`)
+      .set('Accept', 'application/json')
+      .set('Content-Type', 'application/json')
+      .set('Authorization', `Bearer ${loggedInUser.token}`)
+      .send(updateTodo);
+
+    expect(updateResponse.status).toEqual(200);
+    expect(updateResponse.body.task).toEqual(updateTodo.task);
+    expect(updateResponse.body.tag).toEqual(updateTodo.tag);
+  });
+});
+
 describe('DELETE todo endpoint', () => {
   const loggedInUser = {
     id: '',
