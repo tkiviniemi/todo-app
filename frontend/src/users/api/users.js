@@ -7,6 +7,8 @@ export const singUpUser = async ({ name, email, password }) => {
     },
     body: JSON.stringify({ name, email, password }),
   });
+
+  return await res.json();
 };
 
 export const loginUser = async ({ email, password }) => {

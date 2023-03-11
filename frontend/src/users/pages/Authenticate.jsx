@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, useContext } from 'react';
 import { useMutation } from 'react-query';
 
 import Button from '../../shared/components/button/Button';
@@ -6,12 +6,16 @@ import Card from '../../shared/components/card/Card';
 import Input from '../../shared/components/input/Input';
 import { singUpUser, loginUser } from '../api/users';
 
+import { AuthContext } from '../../shared/context/auth-context';
+
 import './Authenticate.css';
 
-const Authenticate = (props) => {
+const Authenticate = () => {
   const nameRef = useRef();
   const emailRef = useRef();
   const passwordRef = useRef();
+
+  const auth = useContext(AuthContext);
 
   const [isLoginMode, setIsLoginMode] = useState(true);
 
@@ -23,6 +27,7 @@ const Authenticate = (props) => {
     mutationFn: singUpUser,
     onSuccess: (data) => {
       console.log(data);
+      auth.login(data.id, data.token);
     },
     onError: (error) => {
       console.log(error);
@@ -33,6 +38,7 @@ const Authenticate = (props) => {
     mutationFn: loginUser,
     onSuccess: (data) => {
       console.log(data);
+      auth.login(data.id, data.token);
     },
     onError: (error) => {
       console.log(error);

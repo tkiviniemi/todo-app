@@ -4,7 +4,7 @@ Simple todo app, implementing a basic CRUD functionality.
 
 Made with React and Node.js
 
-Originates from a private GitHub classroom repo for a full stack course, hence giant first commit.
+Originates from a private GitHub classroom repo for a full stack course, hence the giant first commit.
 
 Copied over and continuing in this repo so that the project is visible to everyone.
 
