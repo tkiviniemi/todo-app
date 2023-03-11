@@ -26,10 +26,11 @@ Copied over and continuing in this repo so that the project is visible to everyo
   - [x] Get users
   - [ ] Update a todo
   - [ ] Update a user
-  - [ ] Delete a todo
+  - [x] Delete a todo
   - [ ] Delete a user
-- [ ] Authenticate users on Create/Update/Delete
-  - All authentication is skipped for now, backend works if you enable the authentication in routes
+- [ ] Authentication
+  - [x] Authenticate for Create / Update / Delete
+  - [x] Store uuid & token in cache (for 1hour)
 - [ ] Tests
   - [x] Backend Unit tests
   - [ ] Frontend Unit tests
