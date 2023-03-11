@@ -15,7 +15,7 @@ router.get('/', getTodos);
 
 router.get('/:id', getTodoById);
 
-//router.use(verifyToken);
+router.use(verifyToken);
 
 router.post('/', createTodo);
 

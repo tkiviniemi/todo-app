@@ -89,6 +89,7 @@ const loginUser = async (req, res) => {
     return res.status(500).send('Something went wrong with login in the user');
   }
   console.log(identifiedUser);
+
   let isValidPassword = false;
   try {
     isValidPassword = await bcrypt.compare(password, identifiedUser.password);
@@ -97,13 +98,12 @@ const loginUser = async (req, res) => {
     return res.status(500).send('Could not log you in , check your credetials');
   }
   if (!isValidPassword) {
-    return es
+    return res
       .status(401)
       .send('Could not identify user, credetials might be wrong');
   }
-  let token;
   try {
-    token = jwt.sign(
+    const token = jwt.sign(
       {
         id: identifiedUser.id,
         email: identifiedUser.email,
@@ -111,14 +111,15 @@ const loginUser = async (req, res) => {
       process.env.JWT_KEY,
       { expiresIn: '1h' }
     );
+
+    res.status(201).json({
+      id: identifiedUser.id,
+      email: identifiedUser.email,
+      token: token,
+    });
   } catch (err) {
     return res.status(500).send('Something went wrong with login in the user');
   }
-  res.status(201).json({
-    id: identifiedUser.id,
-    email: identifiedUser.email,
-    token: token,
-  });
 };
 
 const getUsers = async (req, res) => {
