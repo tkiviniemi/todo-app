@@ -5,12 +5,16 @@ import Input from '../../shared/components/input/Input';
 import Button from '../../shared/components/button/Button';
 import { createTodo } from '../api/todos';
 
+import { AuthContext } from '../../shared/context/auth-context';
+
 import './AddTodo.css';
 
 const AddTodo = () => {
   const taskRef = useRef();
   const tagRef = useRef();
   const doneRef = useRef();
+
+  const auth = useContext(AuthContext);
 
   const createTodoMutation = useMutation({
     mutationFn: createTodo,
@@ -22,6 +26,7 @@ const AddTodo = () => {
       task: taskRef.current.value,
       tag: tagRef.current.value,
       done: doneRef.current.checked,
+      token: auth.token,
     });
   };
 
