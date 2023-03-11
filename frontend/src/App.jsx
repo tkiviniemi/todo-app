@@ -5,7 +5,7 @@ import Users from './users/pages/Users';
 import Todos from './todos/pages/Todos';
 import AddTodo from './todos/pages/AddTodo';
 import Authenticate from './users/pages/Authenticate';
-import Navbar from './shared/components/navbar/Navbar';
+import MainNavigation from './shared/components/navigation/MainNavigation';
 
 import './App.css';
 
@@ -15,9 +15,9 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <Router>
-        <Navbar />
+        <MainNavigation />
         <Routes>
-          <Route path="/todos" element={<Todos />} />
+          <Route path="/" element={<Todos />} />
           <Route path="/todos/new" element={<AddTodo />} />
           <Route path="/users" element={<Users />} />
           <Route path="/auth" element={<Authenticate />} />
