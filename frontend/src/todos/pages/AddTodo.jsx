@@ -1,5 +1,6 @@
-import { useRef } from 'react';
+import { useRef, useContext } from 'react';
 import { useMutation } from 'react-query';
+import { useNavigate } from 'react-router-dom';
 
 import Input from '../../shared/components/input/Input';
 import Button from '../../shared/components/button/Button';
@@ -15,6 +16,7 @@ const AddTodo = () => {
   const doneRef = useRef();
 
   const auth = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const createTodoMutation = useMutation({
     mutationFn: createTodo,
@@ -28,6 +30,7 @@ const AddTodo = () => {
       done: doneRef.current.checked,
       token: auth.token,
     });
+    navigate('/');
   };
 
   return (
