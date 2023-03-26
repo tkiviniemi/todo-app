@@ -65,9 +65,16 @@ const Authenticate = () => {
     <Card className="authentication">
       <h2>{isLoginMode ? 'Login' : 'Sign Up'}</h2>
       <form onSubmit={onSubmitHandler}>
-        {!isLoginMode && <Input ref={nameRef} type="text" label="Name" />}
-        <Input ref={emailRef} type="email" label="Email" />
-        <Input ref={passwordRef} type="password" label="Password" />
+        {!isLoginMode && (
+          <Input id="name" ref={nameRef} type="text" label="Name" />
+        )}
+        <Input id="email" ref={emailRef} type="email" label="Email" />
+        <Input
+          id="password"
+          ref={passwordRef}
+          type="password"
+          label="Password"
+        />
         <Button type="submit">{isLoginMode ? 'LOGIN' : 'SIGNUP'}</Button>
       </form>
       <Button inverse onClick={switchModeHandler}>
