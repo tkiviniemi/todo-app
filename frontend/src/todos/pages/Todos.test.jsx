@@ -65,7 +65,6 @@ describe('The Todos Page', () => {
       })
     );
     render(<Todos items={TEST_TODO_DATA} />, { wrapper });
-    screen.debug();
     expect(
       screen.queryByText('An error has occurred: TEST_ERROR')
     ).toBeInTheDocument();

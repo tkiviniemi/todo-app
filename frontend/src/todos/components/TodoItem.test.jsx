@@ -39,16 +39,3 @@ describe('The TodoItem', () => {
     expect(screen.getByRole('listitem')).toHaveClass('todo-item');
   });
 });
-
-/*
-  test('should show a list of todos when todos are available', () => {
-    render(<TodoItem items={TEST_TODO_DATA} />, { wrapper });
-    expect(screen.queryByText('No todos found.')).toBeNull();
-    expect(
-      screen.getByText('Test task 1 - Test tag 1 - Not Done')
-    ).toBeInTheDocument();
-    expect(
-      screen.getByText('Test task 2 - Test tag 2 - Not Done')
-    ).toBeInTheDocument();
-  });
-*/
