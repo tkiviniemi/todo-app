@@ -2,11 +2,10 @@ import { useQuery } from 'react-query';
 
 import LoadingSpinner from '../../shared/components/loadingspinner/LoadingSpinner';
 import UsersList from '../components/UsersList';
+import { getUsers } from '../api/users';
 
 const Users = () => {
-  const { isLoading, error, data } = useQuery('usersData', () =>
-    fetch('http://localhost:5000/api/users').then((res) => res.json())
-  );
+  const { isLoading, error, data } = useQuery('usersData', () => getUsers());
 
   if (isLoading)
     return (
