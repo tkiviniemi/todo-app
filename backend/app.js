@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+require('dotenv').config();
 
 const todos = require('./routes/todos');
 const users = require('./routes/users');
@@ -8,7 +9,7 @@ const app = express();
 app.use(express.json());
 app.use(
   cors({
-    origin: ['http://localhost:5173', 'https://todo-app-mirxii.onrender.com/'],
+    origin: process.env.CLIENT_URL,
   })
 );
 
