@@ -4,6 +4,8 @@ Simple todo app, implementing a basic CRUD functionality.
 
 Made with React and Node.js & Express, MySQL database.
 
+Deployed on render: <https://todo-app-mirxii.onrender.com/>
+
 Originates from a private GitHub classroom repo for a full stack course, hence the giant first commit.
 
 Copied over and continuing in this repo so that the project is visible to everyone.
@@ -36,9 +38,9 @@ Copied over and continuing in this repo so that the project is visible to everyo
   - [x] Frontend Unit tests
   - [x] End-2-End tests
   - [x] Tests ran through Github Actions
-    - Currently only backend tests are ran w/ Actions
   - [ ] More tests so coverage doesn't suck
-- [ ] Deployed to somewhere (with GitHub Actions)
+- [x] Frontend and Backend deployed to render, DB is on a TAMK provided DB Server
+- [ ] Cleanup the code, i.e. remove some revealing console logs
 - [ ] Improve documentation (by a lot)
 
 ## Running the app locally
