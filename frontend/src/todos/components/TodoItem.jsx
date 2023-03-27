@@ -1,8 +1,8 @@
 import React, { useContext, useState } from 'react';
 import { useMutation } from 'react-query';
 
-import Card from '../../shared/components/Card/Card';
-import Button from '../../shared/components/Button/Button';
+import Card from '../../shared/components/card/Card';
+import Button from '../../shared/components/button/Button';
 import Modal from '../../shared/components/modal/Modal';
 
 import { AuthContext } from '../../shared/context/auth-context';
