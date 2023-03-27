@@ -5,7 +5,6 @@ on:
       - main
     paths:
       - backend/**
-
 jobs:
   test:
     timeout-minutes: 5
@@ -49,5 +48,5 @@ jobs:
     needs: test
     runs-on: ubuntu-latest
     steps:
-      - name: Trigger the deploy
-        run: echo Deploying...
+      - name: Trigger the deploy on Render
+        run: curl -X GET ${{ secrets.RENDER_BACKEND_HOOK }}
