@@ -8,8 +8,9 @@
     "build": "vite build",
     "preview": "vite preview",
     "test": "vitest",
-    "test:ui": "vitest --ui",
-    "coverage": "vitest run --coverage"
+    "test:ci": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "test:cypress": "npx cypress run"
   },
   "dependencies": {
     "react": "^18.2.0",
