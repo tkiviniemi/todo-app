@@ -1,5 +1,5 @@
 export const singUpUser = async ({ name, email, password }) => {
-  const res = await fetch('http://localhost:5000/api/users/signup', {
+  const res = await fetch(`${import.meta.env.VITE_API_URL}/api/users/signup`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -12,7 +12,7 @@ export const singUpUser = async ({ name, email, password }) => {
 };
 
 export const loginUser = async ({ email, password }) => {
-  const res = await fetch('http://localhost:5000/api/users/login', {
+  const res = await fetch(`${import.meta.env.VITE_API_URL}/api/users/login`, {
     method: 'POST',
     headers: {
       Accept: 'application/json',

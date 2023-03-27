@@ -5,7 +5,7 @@ export const getTodos = async () => {
 
 export const createTodo = async ({ task, tag, done, token }) => {
   console.log(task, tag, done);
-  const res = await fetch('http://localhost:5000/api/todos', {
+  const res = await fetch(`${import.meta.env.VITE_API_URL}/api/todos`, {
     method: 'POST',
     headers: {
       Accept: 'application/json',
@@ -22,7 +22,7 @@ export const createTodo = async ({ task, tag, done, token }) => {
 };
 
 export const updateTodo = async ({ id, task, tag, done, token }) => {
-  const res = await fetch(`http://localhost:5000/api/todos/${id}`, {
+  const res = await fetch(`${import.meta.env.VITE_API_URL}/api/todos/${id}`, {
     method: 'PUT',
     headers: {
       Accept: 'application/json',
@@ -39,7 +39,7 @@ export const updateTodo = async ({ id, task, tag, done, token }) => {
 };
 
 export const deleteTodo = async ({ id, token }) => {
-  const res = await fetch(`http://localhost:5000/api/todos/${id}`, {
+  const res = await fetch(`${import.meta.env.VITE_API_URL}/api/todos/${id}`, {
     method: 'DELETE',
     headers: {
       Authorization: `Bearer ${token}`,
